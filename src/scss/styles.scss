@@ -1,9 +1,71 @@
 
+//2 variables
+$headerfooterheight: 4em;
+$basicfontsize: 10px;
+
+//Function
+@function doubler($num){
+    $output: $num * 2;
+    @return $output;
+}
+
+//Mixin
+@mixin makeitpink{
+    color: pink;
+    background-color: pink;
+    border: pink solid 3px;
+}
+
+
+.importantbutton{
+    border: solid red 4px;
+}
+
+//Extended class from .importantbutton
+.moreimportantbutton{
+    @extend .importantbutton;
+    background-color: limegreen;
+}
+
 $theme-colors: (
-    "primary": #000000
+    "primary": #0000f0
 );
 
 $body-bg: #ededed;
+
+
+//Nested selectors
+body{
+    header{
+        height: $headerfooterheight;
+    }
+
+    main{
+        width: 100%;
+        p{
+            //Nested properties
+            font: {
+                size: $basicfontsize;
+                family: sans-serif;
+                decoration: italic;
+            }
+        }
+        h2{
+            //Use of math
+            font-size: $basicfontsize + 5px;
+            //Nested media query
+            @media screen and (min-width: 900px){
+                font-size: $basicfontsize+2;
+            }
+            //Use of include
+            @include makeitpink;
+        }
+    }
+
+    footer{
+        height: $headerfooterheight
+    }
+}
 
 
 @import "node_modules/bootstrap/scss/bootstrap";
